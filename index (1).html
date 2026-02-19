@@ -1,0 +1,1569 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MIZERO Ndolimana Kelya — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #f5f2ee;
+        --white: #fdfcfb;
+        --surface: #eeeae4;
+        --accent: #1a6b4a;
+        --accent-light: #2d9068;
+        --accent-pale: #e8f4ef;
+        --text: #1c1c1c;
+        --muted: #7a7067;
+        --border: rgba(26, 107, 74, 0.15);
+        --border-dark: rgba(26, 107, 74, 0.3);
+        --font-display: "Playfair Display", serif;
+        --font-ui: "Outfit", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+        --transition: 0.3s ease;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-ui);
+        overflow-x: hidden;
+      }
+
+      /* Subtle paper texture */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 4rem;
+        background: rgba(245, 242, 238, 0.9);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-logo {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+      }
+      .nav-logo span {
+        font-style: italic;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 2.5rem;
+      }
+      nav ul li a {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color var(--transition);
+        position: relative;
+      }
+      nav ul li a::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform var(--transition);
+      }
+      nav ul li a:hover {
+        color: var(--accent);
+      }
+      nav ul li a:hover::after,
+      nav ul li a.active::after {
+        transform: scaleX(1);
+      }
+      nav ul li a.active {
+        color: var(--accent);
+      }
+
+      /* ── HERO ── */
+      #home {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        padding-top: 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4rem 3rem 4rem 4rem;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.1s forwards;
+      }
+      .hero-eyebrow::before {
+        content: "";
+        width: 30px;
+        height: 1px;
+        background: var(--accent);
+      }
+      .hero-name {
+        font-family: var(--font-display);
+        font-size: clamp(2.8rem, 5vw, 5rem);
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+        margin-bottom: 0.5rem;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.25s forwards;
+      }
+      .hero-name .first {
+        display: block;
+        color: var(--text);
+      }
+      .hero-name .last {
+        display: block;
+        color: var(--accent);
+        font-style: italic;
+      }
+      .hero-title {
+        font-family: var(--font-ui);
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--muted);
+        margin-bottom: 2rem;
+        letter-spacing: 0.05em;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.4s forwards;
+      }
+      .hero-summary {
+        font-size: 0.95rem;
+        line-height: 1.85;
+        color: #3d3830;
+        max-width: 480px;
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.55s forwards;
+      }
+      .hero-contacts {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.65s forwards;
+      }
+      .hero-contact-row {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+      .hero-contact-row:hover {
+        color: var(--accent);
+      }
+      .hero-contact-row i {
+        color: var(--accent);
+        width: 14px;
+        text-align: center;
+        font-size: 0.75rem;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: fadeUp 0.7s 0.75s forwards;
+      }
+      .btn-fill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.8rem 1.8rem;
+        background: var(--accent);
+        color: #fff;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 2px;
+        transition:
+          background var(--transition),
+          transform 0.2s;
+      }
+      .btn-fill:hover {
+        background: var(--accent-light);
+        transform: translateY(-2px);
+      }
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.8rem 1.8rem;
+        border: 1.5px solid var(--accent);
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 2px;
+        transition:
+          background var(--transition),
+          color var(--transition),
+          transform 0.2s;
+      }
+      .btn-ghost:hover {
+        background: var(--accent);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      .hero-right {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 4rem 3rem;
+      }
+      .hero-photo-frame {
+        width: 280px;
+        height: 340px;
+        position: relative;
+        opacity: 0;
+        animation: fadeIn 1s 0.4s forwards;
+      }
+      .hero-photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 3px;
+        display: block;
+        filter: contrast(1.05);
+      }
+      .hero-photo-frame::before {
+        content: "";
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        right: -14px;
+        bottom: -14px;
+        border: 2px solid var(--accent);
+        border-radius: 3px;
+        z-index: -1;
+      }
+
+      /* Quick stats under photo */
+      .hero-quick-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        margin-top: 2.5rem;
+        width: 100%;
+        max-width: 300px;
+        opacity: 0;
+        animation: fadeIn 0.8s 0.9s forwards;
+      }
+      .qs-item {
+        text-align: center;
+      }
+      .qs-val {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .qs-lab {
+        font-family: var(--font-mono);
+        font-size: 0.55rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 0.25rem;
+      }
+
+      /* ── SECTIONS ── */
+      section {
+        padding: 6rem 4rem;
+      }
+
+      .section-header {
+        margin-bottom: 3rem;
+      }
+      .section-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.7rem;
+      }
+      .section-kicker::before {
+        content: "";
+        width: 20px;
+        height: 1px;
+        background: var(--accent);
+      }
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        font-weight: 700;
+        line-height: 1.1;
+        color: var(--text);
+      }
+      .section-title em {
+        font-style: italic;
+        color: var(--accent);
+      }
+
+      /* ── ABOUT ── */
+      #about {
+        background: var(--white);
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 5rem;
+        align-items: start;
+      }
+      .about-body p {
+        font-size: 1rem;
+        line-height: 1.9;
+        color: #3d3830;
+        margin-bottom: 1.2rem;
+      }
+      .about-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 1.5rem;
+      }
+      .tag {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.35rem 0.9rem;
+        background: var(--accent-pale);
+        color: var(--accent);
+        border-radius: 2px;
+        border: 1px solid var(--border-dark);
+      }
+      .about-side {
+      }
+      .info-block {
+        margin-bottom: 2rem;
+      }
+      .info-block-title {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1rem;
+      }
+      .info-row {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.7rem;
+        font-size: 0.88rem;
+        color: var(--text);
+      }
+      .info-row i {
+        color: var(--accent);
+        width: 14px;
+        font-size: 0.78rem;
+      }
+
+      /* Lang bars */
+      .lang-row {
+        margin-bottom: 1rem;
+      }
+      .lang-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.4rem;
+      }
+      .lang-name {
+        font-family: var(--font-ui);
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+      .lang-level {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .lang-track {
+        height: 3px;
+        background: var(--surface);
+        border-radius: 99px;
+        overflow: hidden;
+      }
+      .lang-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        border-radius: 99px;
+        width: 0%;
+        transition: width 1.3s ease;
+      }
+
+      /* Hobbies */
+      .hobby-list {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+      }
+      .hobby-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-ui);
+        font-size: 0.82rem;
+        padding: 0.4rem 0.9rem;
+        border: 1px solid var(--border-dark);
+        border-radius: 99px;
+        color: var(--muted);
+      }
+      .hobby-item i {
+        color: var(--accent);
+        font-size: 0.75rem;
+      }
+
+      /* ── EDUCATION ── */
+      #education {
+        background: var(--bg);
+      }
+      .edu-timeline {
+        position: relative;
+        padding-left: 2rem;
+      }
+      .edu-timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        background: var(--border-dark);
+      }
+      .edu-item {
+        position: relative;
+        margin-bottom: 2.5rem;
+        padding-left: 1.5rem;
+      }
+      .edu-item::before {
+        content: "";
+        position: absolute;
+        left: -2rem;
+        top: 8px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 2px solid var(--bg);
+        box-shadow: 0 0 0 2px var(--accent);
+      }
+      .edu-period {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.4rem;
+      }
+      .edu-degree {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.2rem;
+      }
+      .edu-school {
+        font-size: 0.88rem;
+        color: var(--accent);
+        font-weight: 500;
+      }
+      .edu-location {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+
+      /* ── PROJECTS ── */
+      #projects {
+        background: var(--white);
+      }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+      .project-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s,
+          border-color 0.3s;
+      }
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 60px rgba(26, 107, 74, 0.1);
+        border-color: var(--border-dark);
+      }
+      .project-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+      }
+      .project-card:hover::after {
+        transform: scaleX(1);
+      }
+      .project-period {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.7rem;
+      }
+      .project-name {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+        line-height: 1.3;
+      }
+      .project-school {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.2rem;
+      }
+      .project-bullets {
+        list-style: none;
+      }
+      .project-bullets li {
+        font-size: 0.88rem;
+        line-height: 1.7;
+        color: #4a4540;
+        padding-left: 1rem;
+        position: relative;
+        margin-bottom: 0.4rem;
+      }
+      .project-bullets li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-size: 0.75rem;
+      }
+
+      /* ── SKILLS ── */
+      #skills {
+        background: var(--bg);
+      }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+      .skills-col-title {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1.5rem;
+      }
+
+      /* Technical skills as pill grid */
+      .tech-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+      }
+      .tech-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 1rem;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        font-family: var(--font-ui);
+        font-size: 0.82rem;
+        color: var(--text);
+        transition:
+          border-color var(--transition),
+          background var(--transition),
+          transform 0.2s;
+      }
+      .tech-pill:hover {
+        border-color: var(--accent);
+        background: var(--accent-pale);
+        transform: translateY(-2px);
+      }
+      .tech-pill i {
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+
+      /* Soft skills */
+      .soft-skill {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.2rem;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        margin-bottom: 0.8rem;
+        transition:
+          border-color var(--transition),
+          transform 0.2s;
+      }
+      .soft-skill:hover {
+        border-color: var(--accent);
+        transform: translateX(4px);
+      }
+      .soft-skill-icon {
+        width: 36px;
+        height: 36px;
+        background: var(--accent-pale);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .soft-skill-icon i {
+        color: var(--accent);
+        font-size: 0.85rem;
+      }
+      .soft-skill-text {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      /* ── REFERENCES ── */
+      #references {
+        background: var(--white);
+      }
+      .refs-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+      .ref-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 1.8rem;
+        transition:
+          border-color var(--transition),
+          transform 0.3s;
+      }
+      .ref-card:hover {
+        border-color: var(--border-dark);
+        transform: translateY(-3px);
+      }
+      .ref-quote-mark {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        color: var(--accent);
+        opacity: 0.3;
+        line-height: 1;
+        margin-bottom: 0.3rem;
+      }
+      .ref-name {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.3rem;
+      }
+      .ref-role {
+        font-size: 0.8rem;
+        color: var(--accent);
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+      }
+      .ref-org {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+      .ref-contacts {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .ref-contact {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+      .ref-contact:hover {
+        color: var(--accent);
+      }
+      .ref-contact i {
+        color: var(--accent);
+        width: 12px;
+        font-size: 0.65rem;
+      }
+
+      /* ── CONTACT ── */
+      #contact {
+        background: var(--accent);
+        color: #fff;
+      }
+      .contact-inner {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 5rem;
+        align-items: start;
+      }
+      .contact-left h2 {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        font-weight: 700;
+        font-style: italic;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+        color: #fff;
+      }
+      .contact-left p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 2rem;
+      }
+      .contact-detail {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.9rem;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.88rem;
+        transition: color var(--transition);
+      }
+      .contact-detail:hover {
+        color: #fff;
+      }
+      .contact-detail i {
+        width: 16px;
+        opacity: 0.7;
+        font-size: 0.85rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      label {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.6);
+      }
+      input,
+      textarea {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        padding: 0.85rem 1rem;
+        font-family: var(--font-ui);
+        font-size: 0.9rem;
+        outline: none;
+        border-radius: 2px;
+        transition:
+          border-color var(--transition),
+          background var(--transition);
+        width: 100%;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: rgba(255, 255, 255, 0.35);
+      }
+      input:focus,
+      textarea:focus {
+        border-color: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.15);
+      }
+      textarea {
+        height: 120px;
+        resize: vertical;
+      }
+      .form-submit {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.9rem 2rem;
+        background: #fff;
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        font-weight: 600;
+        transition:
+          background var(--transition),
+          transform 0.2s;
+        align-self: flex-start;
+      }
+      .form-submit:hover {
+        background: #e8f4ef;
+        transform: translateY(-2px);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: #0f3d2a;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 1.8rem 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      footer span {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.1em;
+        transition: color var(--transition);
+      }
+      .footer-links a:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      /* ── REVEAL ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.75s ease,
+          transform 0.75s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 960px) {
+        #home {
+          grid-template-columns: 1fr;
+        }
+        #home::before {
+          display: none;
+        }
+        .hero-right {
+          padding-top: 0;
+        }
+        section {
+          padding: 5rem 2rem;
+        }
+        nav {
+          padding: 1.2rem 1.5rem;
+        }
+        nav ul {
+          gap: 1.5rem;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+        .refs-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-inner {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        footer {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1.5rem 2rem;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 600px) {
+        nav ul {
+          display: none;
+        }
+        .hero-left {
+          padding: 2rem 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-logo">MIZERO <span>Kelya</span></div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#references">References</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section id="home">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Software Engineering Student · Rwanda</div>
+        <h1 class="hero-name">
+          <span class="first">MIZERO</span>
+          <span class="last">Ndolimana Kelya</span>
+        </h1>
+        <p class="hero-title">
+          Final-Year Software Engineering Student · INES Ruhengeri
+        </p>
+        <p class="hero-summary">
+          I build practical systems that manage users, records, and
+          transactions. I enjoy learning through practice and improving my
+          skills through academic projects motivated to support organizations
+          through reliable, well-organized software solutions.
+        </p>
+        <div class="hero-contacts">
+          <a
+            href="mailto:mizerondolimanakelya@gmail.com"
+            class="hero-contact-row"
+          >
+            <i class="fas fa-envelope"></i> mizerondolimanakelya@gmail.com
+          </a>
+          <a href="tel:+250784908332" class="hero-contact-row">
+            <i class="fas fa-phone"></i> +250 786 490 832
+          </a>
+          <span class="hero-contact-row">
+            <i class="fas fa-map-marker-alt"></i> Rwanda / Musanze
+          </span>
+          <a
+            href="https://www.linkedin.com/in/kelya-mizero-011361327"
+            target="_blank"
+            class="hero-contact-row"
+          >
+            <i class="fab fa-linkedin"></i>
+            linkedin.com/in/kelya-mizero-011361327
+          </a>
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-fill"
+            ><i class="fas fa-paper-plane"></i> Get in Touch</a
+          >
+          <a href="#projects" class="btn-ghost"
+            ><i class="fas fa-code"></i> View Projects</a
+          >
+          <a href="CV_2026-02-13_kelya.pdf" download class="btn-ghost"
+            ><i class="fas fa-download"></i> Download CV</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section id="about">
+      <div class="section-header reveal">
+        <div class="section-kicker">01 — About Me</div>
+        <h2 class="section-title">Who I <em>am</em></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-body reveal">
+          <p>
+            I am a final-year Software Engineering student at INES Ruhengeri in
+            Musanze, Rwanda, with a strong interest in building practical
+            systems that manage users, records, and transactions.
+          </p>
+          <p>
+            I enjoy learning through hands-on practice and continuously
+            improving my skills through academic and personal projects. My goal
+            is to grow professionally and contribute to organizations through
+            reliable, clean, and well-organized software solutions.
+          </p>
+          <p>
+            Originally from Rwanda, I am 22 years old and fluent in Kinyarwanda,
+            English, and French giving me the ability to collaborate in diverse,
+            international environments.
+          </p>
+          <div class="about-tags">
+            <span class="tag">Clean Code</span>
+            <span class="tag">Websites Creation</span>
+            <span class="tag">Frontend Logic</span>
+            <span class="tag">Problem Solving</span>
+            <span class="tag">Teamwork</span>
+            <span class="tag">Debugging</span>
+          </div>
+        </div>
+        <div class="about-side reveal">
+          <div class="info-block">
+            <div class="info-block-title">Personal Info</div>
+            <div class="info-row"><i class="fas fa-flag"></i> Rwandan</div>
+            <div class="info-row">
+              <i class="fas fa-birthday-cake"></i> 22 years old
+            </div>
+            <div class="info-row">
+              <i class="fas fa-map-marker-alt"></i> Rwanda / Kigali / Musanze
+            </div>
+          </div>
+
+          <div class="info-block">
+            <div class="info-block-title">Languages</div>
+            <div class="lang-row">
+              <div class="lang-label">
+                <span class="lang-name">Kinyarwanda</span>
+                <span class="lang-level">Native · 100%</span>
+              </div>
+              <div class="lang-track">
+                <div class="lang-fill" style="--lw: 100%"></div>
+              </div>
+            </div>
+            <div class="lang-row">
+              <div class="lang-label">
+                <span class="lang-name">English</span>
+                <span class="lang-level">Advanced · 85%</span>
+              </div>
+              <div class="lang-track">
+                <div class="lang-fill" style="--lw: 85%"></div>
+              </div>
+            </div>
+            <div class="lang-row">
+              <div class="lang-label">
+                <span class="lang-name">French</span>
+                <span class="lang-level">Intermediate · 60%</span>
+              </div>
+              <div class="lang-track">
+                <div class="lang-fill" style="--lw: 60%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-block">
+            <div class="info-block-title">Hobbies</div>
+            <div class="hobby-list">
+              <span class="hobby-item"
+                ><i class="fas fa-music"></i> Singing</span
+              >
+              <span class="hobby-item"
+                ><i class="fas fa-book"></i> Reading</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ EDUCATION ═══ -->
+    <section id="education">
+      <div class="section-header reveal">
+        <div class="section-kicker">02 — Education</div>
+        <h2 class="section-title">Academic <em>background</em></h2>
+      </div>
+      <div class="edu-timeline">
+        <div class="edu-item reveal">
+          <div class="edu-period">Since July 2023 — Present</div>
+          <div class="edu-degree">
+            Bachelor of Science in Software Engineering
+          </div>
+          <div class="edu-school">INES Ruhengeri</div>
+          <div class="edu-location">
+            <i
+              class="fas fa-map-marker-alt"
+              style="color: var(--accent); font-size: 0.7rem; margin-right: 4px"
+            ></i>
+            Rwanda / Musanze
+          </div>
+        </div>
+        <div class="edu-item reveal">
+          <div class="edu-period">January 2019 — August 2022</div>
+          <div class="edu-degree">
+            Rwandan Advanced Certificate of Education
+          </div>
+          <div class="edu-school">GS Obutare</div>
+          <div class="edu-location">
+            <i
+              class="fas fa-map-marker-alt"
+              style="color: var(--accent); font-size: 0.7rem; margin-right: 4px"
+            ></i>
+            Rwanda / Butare
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROJECTS ═══ -->
+    <section id="projects">
+      <div class="section-header reveal">
+        <div class="section-kicker">03 — Projects</div>
+        <h2 class="section-title">What I've <em>built</em></h2>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card reveal">
+          <div class="project-period">November 2025 — December 2025</div>
+          <div class="project-name">Client & Records Management System</div>
+          <div class="project-school">INES Ruhengeri · Musanze</div>
+          <ul class="project-bullets">
+            <li>
+              Developed a system to register, update, and view client
+              information.
+            </li>
+            <li>
+              Focused on structured data storage and easy retrieval, similar to
+              insurance client systems.
+            </li>
+          </ul>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-period">January 2026 — February 2026</div>
+          <div class="project-name">Transaction & Data Tracking System</div>
+          <div class="project-school">INES Ruhengeri · Musanze</div>
+          <ul class="project-bullets">
+            <li>
+              Worked on a system to record transactions and track historical
+              data.
+            </li>
+            <li>
+              Improved understanding of accuracy and consistency in data
+              handling.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SKILLS ═══ -->
+    <section id="skills">
+      <div class="section-header reveal">
+        <div class="section-kicker">04 — Skills</div>
+        <h2 class="section-title">My <em>toolkit</em></h2>
+      </div>
+      <div class="skills-grid">
+        <div class="reveal">
+          <div class="skills-col-title">Technical / Computer Skills</div>
+          <div class="tech-pills">
+            <div class="tech-pill"><i class="fab fa-python"></i> Python</div>
+            <div class="tech-pill"><i class="fab fa-js"></i> JavaScript</div>
+            <div class="tech-pill"><i class="fas fa-code"></i> C / C++</div>
+            <div class="tech-pill"><i class="fab fa-html5"></i> HTML & CSS</div>
+            <div class="tech-pill">
+              <i class="fab fa-git-alt"></i> Git & GitHub
+            </div>
+            <div class="tech-pill">
+              <i class="fas fa-server"></i> Frontend Logic
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="skills-col-title">Professional Skills</div>
+          <div class="soft-skill">
+            <div class="soft-skill-icon"><i class="fas fa-comments"></i></div>
+            <div class="soft-skill-text">Cross-Functional Communication</div>
+          </div>
+          <div class="soft-skill">
+            <div class="soft-skill-icon"><i class="fas fa-file-code"></i></div>
+            <div class="soft-skill-text">Clean Code Development</div>
+          </div>
+          <div class="soft-skill">
+            <div class="soft-skill-icon"><i class="fas fa-bug"></i></div>
+            <div class="soft-skill-text">Debugging & Troubleshooting</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ REFERENCES ═══ -->
+    <section id="references">
+      <div class="section-header reveal">
+        <div class="section-kicker">05 — References</div>
+        <h2 class="section-title">Who vouches <em>for me</em></h2>
+      </div>
+      <div class="refs-grid">
+        <div class="ref-card reveal">
+          <div class="ref-quote-mark">"</div>
+          <div class="ref-name">Hon. Izere Ingrid Marie Parfaite</div>
+          <div class="ref-role">Member of Parliament</div>
+          <div class="ref-org">Rwanda Parliament</div>
+          <div class="ref-contacts">
+            <a href="mailto:pizere@parliament.gov.rw" class="ref-contact">
+              <i class="fas fa-envelope"></i> pizere@parliament.gov.rw
+            </a>
+            <a href="tel:+25089921088" class="ref-contact">
+              <i class="fas fa-phone"></i> +25089921088
+            </a>
+          </div>
+        </div>
+        <div class="ref-card reveal">
+          <div class="ref-quote-mark">"</div>
+          <div class="ref-name">Dr. BARIBESHYA Jean Bosco</div>
+          <div class="ref-role">Vice Chancellor</div>
+          <div class="ref-org">INES Ruhengeri</div>
+          <div class="ref-contacts">
+            <a href="mailto:dsec@ines.ac.rw" class="ref-contact">
+              <i class="fas fa-envelope"></i> dsec@ines.ac.rw
+            </a>
+            <a href="tel:+250788884522" class="ref-contact">
+              <i class="fas fa-phone"></i> +250 788 884 522
+            </a>
+          </div>
+        </div>
+        <div class="ref-card reveal">
+          <div class="ref-quote-mark">"</div>
+          <div class="ref-name">Mr. NIYIGENA Eric</div>
+          <div class="ref-role">Lecturer</div>
+          <div class="ref-org">INES Ruhengeri</div>
+          <div class="ref-contacts">
+            <a href="mailto:niyigenae46@gmail.com" class="ref-contact">
+              <i class="fas fa-envelope"></i> niyigenae46@gmail.com
+            </a>
+            <a href="tel:+250789386102" class="ref-contact">
+              <i class="fas fa-phone"></i> +250 789 386 102
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact">
+      <div class="contact-inner">
+        <div class="contact-left reveal">
+          <h2>Let's work<br />together.</h2>
+          <p>
+            I'm open to internship opportunities, collaborative projects, and
+            entry-level software roles. Feel free to reach out!
+          </p>
+          <a
+            href="mailto:mizerondolimanakelya@gmail.com"
+            class="contact-detail"
+          >
+            <i class="fas fa-envelope"></i> mizerondolimanakelya@gmail.com
+          </a>
+          <a href="tel:+250784908332" class="contact-detail">
+            <i class="fas fa-phone"></i> +250 786 490 832
+          </a>
+          <a
+            href="https://www.linkedin.com/in/kelya-mizero-011361327"
+            target="_blank"
+            class="contact-detail"
+          >
+            <i class="fab fa-linkedin"></i>
+            linkedin.com/in/kelya-mizero-011361327
+          </a>
+          <span class="contact-detail">
+            <i class="fas fa-map-marker-alt"></i> Rwanda / Kigali / Musanze
+          </span>
+        </div>
+        <div class="reveal">
+          <form action="https://api.web3forms.com/submit" method="POST">
+            <input
+              type="hidden"
+              name="access_key"
+              value="YOUR_ACCESS_KEY_HERE"
+            />
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="What's this about?"
+              />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell me about the opportunity..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="form-submit">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2026 MIZERO Ndolimana Kelya · INES-Ruhengeri, Rwanda</span>
+      <div class="footer-links">
+        <a href="mailto:mizerondolimanakelya@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/kelya-mizero-011361327"
+          >LinkedIn</a
+        >
+        <a href="#home">Back to top</a>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // ── Scroll Reveal ──
+        const reveals = document.querySelectorAll(".reveal");
+        const revObs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry, i) => {
+              if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add("visible"), i * 90);
+                revObs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+        reveals.forEach((el) => revObs.observe(el));
+
+        // ── Language Bar Animation ──
+        const langTracks = document.querySelectorAll(".lang-track");
+        const langObs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const fill = entry.target.querySelector(".lang-fill");
+                if (fill)
+                  fill.style.width =
+                    fill.style.getPropertyValue("--lw") ||
+                    getComputedStyle(fill).getPropertyValue("--lw");
+                entry.target.classList.add("animated");
+                langObs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.4 },
+        );
+        langTracks.forEach((t) => langObs.observe(t));
+
+        // ── Active Nav ──
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll("nav ul li a");
+        function setActive() {
+          let cur = "";
+          sections.forEach((s) => {
+            if (window.scrollY >= s.offsetTop - 160) cur = s.id;
+          });
+          navLinks.forEach((a) => {
+            a.classList.remove("active");
+            if (a.getAttribute("href") === "#" + cur) a.classList.add("active");
+          });
+        }
+        window.addEventListener("scroll", setActive, { passive: true });
+        setActive();
+
+        // ── Nav shadow ──
+        const nav = document.querySelector("nav");
+        window.addEventListener(
+          "scroll",
+          () => {
+            nav.style.boxShadow =
+              window.scrollY > 30 ? "0 4px 30px rgba(0,0,0,0.08)" : "none";
+          },
+          { passive: true },
+        );
+
+        // ── Fix lang bar animation ──
+        // Store the target widths and animate them on scroll
+        document.querySelectorAll(".lang-fill").forEach((el) => {
+          const match =
+            el.getAttribute("style") &&
+            el.getAttribute("style").match(/--lw:\s*([^;'"]+)/);
+          if (match) {
+            el._targetWidth = match[1].trim();
+            el.style.width = "0%";
+          }
+        });
+        const langFillObs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.querySelectorAll(".lang-fill").forEach((fill) => {
+                  if (fill._targetWidth) {
+                    setTimeout(() => {
+                      fill.style.width = fill._targetWidth;
+                    }, 200);
+                  }
+                });
+                langFillObs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.3 },
+        );
+        document
+          .querySelectorAll(".lang-track")
+          .forEach((t) => langFillObs.observe(t.parentElement || t));
+      });
+    </script>
+  </body>
+</html>
